@@ -49,8 +49,17 @@ INSTALLED_APPS = [
     'submissions',
     'contests',
     'groups',
-    'leaderboard'
+    'leaderboard',
 
+
+
+    #  # ALL 6 custom apps must be here:
+    # 'users.apps.UsersConfig',
+    # 'problems.apps.ProblemsConfig',
+    # 'submissions.apps.SubmissionsConfig',
+    # 'contests.apps.ContestsConfig',
+    # 'groups.apps.GroupsConfig',
+    # 'leaderboard.apps.LeaderboardConfig',
 ]
 
 MIDDLEWARE = [
