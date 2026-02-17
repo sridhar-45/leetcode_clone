@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'users',
     'problems',
     'submissions',
+    'contests',
+    'groups',
+    'leaderboard'
 
 ]
 
