@@ -22,3 +22,23 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+
+# Python
+__pycache__/
+*.pyc
+db.sqlite3
+.env
+
+# Node
+node_modules/
+dist/
+
+# Vite
+frontend/node_modules/
+frontend/dist/
+
+# OS
+.DS_Store
+Thumbs.db
