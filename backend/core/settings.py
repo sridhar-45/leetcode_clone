@@ -101,9 +101,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'leetcode_clone',
-        'USER': 'root',
+        'USER': 'sridhar',
         'PASSWORD': 'sridhar@204',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1', # this is for all os,  'HOST': 'localhost', # this is windows
         'PORT': '3306',
     }
 }
