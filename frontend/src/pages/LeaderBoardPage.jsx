@@ -11,8 +11,8 @@ import { authAPI } from '../services/authAPI'
 import { groupsAPI } from '../services/groupsAPI'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorMessage from '../components/common/ErrorMessage'
-import { FiCode, FiUser, FiLogOut, FiUsers } from "react-icons/fi";
-import { FaTrophy } from "react-icons/fa";
+import { FiUsers, FiPlus, FiClock } from "react-icons/fi"
+import { FaTrophy } from "react-icons/fa"
 
 
 const LeaderboardPage = () => {
@@ -87,7 +87,7 @@ const LeaderboardPage = () => {
                 : 'bg-gray-800 text-gray-400 hover:text-white'
             }`}
           >
-            <FiTrophy />
+            <FaTrophy />
             Users
           </button>
           <button

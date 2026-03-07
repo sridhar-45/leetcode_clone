@@ -1,5 +1,5 @@
 import { useAuth } from '../../context/AuthContext'
-import { FiCode, FiUser, FiLogOut, FiUsers } from "react-icons/fi";
+import { FiCode, FiZap, FiTrendingUp } from "react-icons/fi";
 import { FaTrophy } from "react-icons/fa";
 
 
@@ -9,7 +9,7 @@ const ProfilePage = () => {
   if (!user) return null
 
   const stats = [
-    { label: 'Total Points', value: user.total_points, icon: FiTrophy, color: 'text-yellow-500' },
+    { label: 'Total Points', value: user.total_points, icon: FaTrophy, color: 'text-yellow-500' },
     { label: 'Problems Solved', value: user.problems_solved, icon: FiCode, color: 'text-blue-500' },
     { label: 'Current Streak', value: `${user.current_streak} days`, icon: FiZap, color: 'text-green-500' },
     { label: 'Global Rank', value: `#${user.global_ranking || 'Unranked'}`, icon: FiTrendingUp, color: 'text-purple-500' },
