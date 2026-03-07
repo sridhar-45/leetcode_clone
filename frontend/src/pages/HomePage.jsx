@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { FiCode, FiUser, FiLogOut, FiUsers } from "react-icons/fi";
-import { FaTrophy } from "react-icons/fa";
+import { FiCode, FiUsers, FiTrendingUp, FiZap, FiAward } from "react-icons/fi";
+  import { FaTrophy } from "react-icons/fa";
 const HomePage = () => {
   const { isAuthenticated } = useAuth()
 
@@ -13,7 +13,7 @@ const HomePage = () => {
       color: 'from-blue-500 to-cyan-500',
     },
     {
-      icon: FiTrophy,
+      icon: FaTrophy,
       title: 'Weekly Contests',
       description: 'Compete with others and climb the leaderboard',
       color: 'from-purple-500 to-pink-500',

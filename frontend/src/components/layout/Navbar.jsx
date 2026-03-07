@@ -13,12 +13,12 @@ const Navbar = () => {
     return location.pathname === path || location.pathname.startsWith(path + '/')
   }
 
-  const navLinks = [
-    { path: '/problems', label: 'Problems', icon: FiCode },
-    { path: '/contests', label: 'Contests', icon: FiTrophy },
-    { path: '/groups', label: 'Groups', icon: FiUsers },
-    { path: '/leaderboard', label: 'Leaderboard', icon: FiTrophy },
-  ]
+const navLinks = [
+  { path: '/problems', label: 'Problems', icon: FiCode },
+  { path: '/contests', label: 'Contests', icon: FaTrophy },
+  { path: '/groups', label: 'Groups', icon: FiUsers },
+  { path: '/leaderboard', label: 'Leaderboard', icon: FaTrophy },
+]
 
   return (
     <nav className="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
