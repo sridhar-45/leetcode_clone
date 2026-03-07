@@ -1,32 +1,63 @@
-import axios from 'axios';
+import axios from 'axios'
 
-const API_BASE_URL = '/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
+// Create axios instance with default config
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-});
+})
 
-// Add token to requests
+// Request interceptor - adds auth token to every request
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('access_token')
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token}`
     }
-    return config;
+    return config
   },
   (error) => {
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
-export const usersAPI = {
-  register: (userData) => api.post('/users/register/', userData),
-  login: (credentials) => api.post('/users/login/', credentials),
-  getProfile: () => api.get('/users/profile/'),
-};
+// Response interceptor - handles token expiration
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config
 
-export default api;
+    // If token expired, try to refresh
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true
+
+      try {
+        const refreshToken = localStorage.getItem('refresh_token')
+        const response = await axios.post(`${API_URL}/api/users/token/refresh/`, {
+          refresh: refreshToken
+        })
+
+        const { access } = response.data
+        localStorage.setItem('access_token', access)
+        
+        originalRequest.headers.Authorization = `Bearer ${access}`
+        return api(originalRequest)
+      } catch (refreshError) {
+        // Refresh failed, logout user
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('refresh_token')
+        localStorage.removeItem('user')
+        window.location.href = '/login'
+        return Promise.reject(refreshError)
+      }
+    }
+
+    return Promise.reject(error)
+  }
+)
+
+export default api
+
