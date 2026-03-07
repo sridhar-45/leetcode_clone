@@ -45,3 +45,4 @@ export const contestsAPI = {
     return response.data
   },
 }
+
