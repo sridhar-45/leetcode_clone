@@ -1,5 +1,7 @@
 import { useAuth } from '../../context/AuthContext'
-import { FiTrophy, FiCode, FiZap, FiTrendingUp, FiCalendar } from 'react-icons/fi'
+import { FiCode, FiUser, FiLogOut, FiUsers } from "react-icons/fi";
+import { FaTrophy } from "react-icons/fa";
+
 
 const ProfilePage = () => {
   const { user } = useAuth()

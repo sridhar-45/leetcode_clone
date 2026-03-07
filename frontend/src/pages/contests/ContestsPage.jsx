@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { contestsAPI } from '../../services/contestsAPI'
 import { useAuth } from '../../context/AuthContext'
 import LoadingSpinner from '../../components/common/LoadingSpinner'
-import { FiTrophy, FiClock, FiUsers, FiPlus } from 'react-icons/fi'
+import { FiCode, FiUser, FiLogOut, FiUsers } from "react-icons/fi"
+import { FaTrophy } from "react-icons/fa"
 import { formatDate, getTimeRemaining } from '../../utils/helpers'
 
 const ContestsPage = () => {

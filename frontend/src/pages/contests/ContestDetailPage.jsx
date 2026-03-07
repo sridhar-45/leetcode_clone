@@ -5,7 +5,8 @@ import { useAuth } from '../../context/AuthContext'
 import LoadingSpinner from '../../components/common/LoadingSpinner'
 import Button from '../../components/common/Button'
 import toast from 'react-hot-toast'
-import { FiClock, FiUsers, FiCode, FiTrophy } from 'react-icons/fi'
+import { FiCode, FiUser, FiLogOut, FiUsers } from "react-icons/fi";
+import { FaTrophy } from "react-icons/fa";
 import { formatDate, getTimeRemaining } from '../../utils/helpers'
 
 const ContestDetailPage = () => {
