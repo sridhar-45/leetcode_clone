@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import { FiCode, FiUser, FiLogOut, FiTrophy, FiUsers } from 'react-icons/fi'
+import { FiCode, FiUser, FiLogOut, FiUsers } from "react-icons/fi";
+import { FaTrophy } from "react-icons/fa";
 import { useState } from 'react'
 
 const Navbar = () => {

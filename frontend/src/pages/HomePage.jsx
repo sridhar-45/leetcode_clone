@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { FiCode, FiTrophy, FiUsers, FiTrendingUp, FiZap, FiAward } from 'react-icons/fi'
-
+import { FiCode, FiUser, FiLogOut, FiUsers } from "react-icons/fi";
+import { FaTrophy } from "react-icons/fa";
 const HomePage = () => {
   const { isAuthenticated } = useAuth()
 
