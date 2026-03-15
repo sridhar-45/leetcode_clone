@@ -23,5 +23,17 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/leetcode_clone/'
+  base: process.env.NODE_ENV === 'production'
+    ? '/leetcode_clone/'
+    : '/',
+  server: {
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
+  }
 })
