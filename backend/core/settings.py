@@ -100,8 +100,8 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'leetcode_clone',
-        'USER': 'sridhar',
+        'NAME': 'leetcode_clone_fresh',
+        'USER': 'root',
         'PASSWORD': 'sridhar@204',
         'HOST': '127.0.0.1', # this is for all os,  'HOST': 'localhost', # this is windows
         'PORT': '3306',

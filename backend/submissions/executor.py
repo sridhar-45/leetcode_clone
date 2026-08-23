@@ -10,7 +10,10 @@ import io
 import json
 import time
 import traceback
-import resource
+try:
+    import resource
+except ImportError:  # The resource module is not available on Windows.
+    resource = None
 
 
 class CodeExecutor:
@@ -276,6 +279,9 @@ class CodeExecutor:
 
     def _get_memory_mb(self) -> float:
         """Get current memory usage in MB"""
+        if resource is None:
+            return 0.0
+
         try:
             usage = resource.getrusage(resource.RUSAGE_SELF)
             return round(usage.ru_maxrss / 1024, 2)  # KB → MB
