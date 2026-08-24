@@ -5,6 +5,23 @@ import toast from 'react-hot-toast'
 
 const AuthContext = createContext()
 
+const getAuthErrorMessage = (error, fallback) => {
+  const data = error.response?.data
+
+  if (!data) return fallback
+  if (typeof data === 'string') return data
+  if (data.error) return data.error
+  if (data.detail) return data.detail
+
+  const messages = Object.entries(data).flatMap(([field, value]) => {
+    const fieldName = field === 'non_field_errors' ? '' : `${field}: `
+    const values = Array.isArray(value) ? value : [value]
+    return values.map((message) => `${fieldName}${message}`)
+  })
+
+  return messages.join(' ') || fallback
+}
+
 export const useAuth = () => {
   const context = useContext(AuthContext)
   if (!context) {
@@ -64,7 +81,7 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true }
     } catch (error) {
-      const message = error.response?.data?.error || 'Login failed'
+      const message = getAuthErrorMessage(error, 'Login failed')
       toast.error(message)
       return { success: false, error: message }
     }
@@ -88,7 +105,7 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true }
     } catch (error) {
-      const message = error.response?.data?.error || 'Registration failed'
+      const message = getAuthErrorMessage(error, 'Registration failed')
       toast.error(message)
       return { success: false, error: message }
     }

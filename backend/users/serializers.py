@@ -6,6 +6,7 @@ Copy this ENTIRE file into backend/users/serializers.py
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
+from django.core.exceptions import ValidationError as DjangoValidationError
 from .models import User, DailyProblem, DailyProblemCompletion
 
 
@@ -72,14 +73,16 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         fields = ['username', 'email', 'password', 'password2',
                   'first_name', 'last_name']
         extra_kwargs = {
-            'password':   {'write_only': True},
+            'email':      {'required': True, 'allow_blank': False},
+            'password':   {'write_only': True, 'trim_whitespace': False},
             'first_name': {'required': False},
             'last_name':  {'required': False},
         }
 
     def validate_email(self, value):
         """Make sure email is unique"""
-        if User.objects.filter(email=value).exists():
+        value = value.strip().lower()
+        if User.objects.filter(email__iexact=value).exists():
             raise serializers.ValidationError("This email is already registered.")
         return value
 
@@ -87,7 +90,17 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         """Make sure both passwords match"""
         if attrs['password'] != attrs['password2']:
             raise serializers.ValidationError({"password": "Passwords do not match."})
-        validate_password(attrs['password'])
+
+        candidate_user = User(
+            username=attrs.get('username', ''),
+            email=attrs.get('email', ''),
+            first_name=attrs.get('first_name', ''),
+            last_name=attrs.get('last_name', ''),
+        )
+        try:
+            validate_password(attrs['password'], user=candidate_user)
+        except DjangoValidationError as exc:
+            raise serializers.ValidationError({'password': exc.messages})
         return attrs
 
     def create(self, validated_data):
